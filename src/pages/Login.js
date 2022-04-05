@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import logo from '../trivia.png';
+import { fetchAPI } from '../redux/actions';
 
 class Login extends Component {
   constructor(props) {
@@ -30,7 +32,8 @@ class Login extends Component {
   }
 
   playBtn = () => {
-    console.log('play');
+    const { tokenRequest } = this.props;
+    tokenRequest();
   }
 
   render() {
@@ -70,4 +73,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  tokenRequest: () => dispatch(fetchAPI()),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
