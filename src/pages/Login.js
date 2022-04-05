@@ -12,9 +12,25 @@ class Login extends Component {
     };
   }
 
+  inputValidation = () => {
+    const { name, email } = this.state;
+
+    const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g; // fonte regex https://regexr.com/3e48o
+    const emailTest = regex.test(email);
+    const nameTest = name.length;
+
+    this.setState({
+      disableBtn: !(emailTest && nameTest),
+    });
+  }
+
   inputHandler = ({ target }) => {
     const { name, value } = target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }, () => this.inputValidation());
+  }
+
+  playBtn = () => {
+    console.log('play');
   }
 
   render() {
@@ -42,6 +58,7 @@ class Login extends Component {
           <button
             type="button"
             disabled={ disableBtn }
+            onClick={ this.playBtn }
           >
             Play
           </button>
