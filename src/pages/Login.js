@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import logo from '../trivia.png';
 
 class Login extends Component {
   constructor(props) {
@@ -19,28 +20,34 @@ class Login extends Component {
   render() {
     const { name, email, disableBtn } = this.state;
     return (
-      <div className="login-container">
-        <input
-          type="text"
-          name="name"
-          data-testid="input-player-name"
-          value={ name }
-          onChange={ this.inputHandler }
-        />
-        <input
-          type="text"
-          name="email"
-          data-testid="input-gravatar-email"
-          value={ email }
-          onChange={ this.inputHandler }
-        />
-        <button
-          type="button"
-          disabled={ disableBtn }
-        >
-          Play
-        </button>
-      </div>
+      <header className="wrapper-container">
+        <img src={ logo } className="App-logo" alt="logo" />
+        <div className="login-container">
+          <input
+            type="text"
+            name="name"
+            data-testid="input-player-name"
+            value={ name }
+            placeholder="Nome do Jogador"
+            onChange={ this.inputHandler }
+          />
+          <input
+            type="text"
+            name="email"
+            data-testid="input-gravatar-email"
+            value={ email }
+            placeholder="E-mail do Jogador"
+            onChange={ this.inputHandler }
+          />
+          <button
+            type="button"
+            disabled={ disableBtn }
+          >
+            Play
+          </button>
+        </div>
+      </header>
+
     );
   }
 }
