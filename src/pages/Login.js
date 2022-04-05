@@ -37,6 +37,11 @@ class Login extends Component {
     tokenRequest();
   }
 
+  settingsBtn = () => {
+    const { history } = this.props;
+    history.push('/settings');
+  }
+
   render() {
     const { name, email, disableBtn } = this.state;
     return (
@@ -67,6 +72,13 @@ class Login extends Component {
           >
             Play
           </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ this.settingsBtn }
+          >
+            Settings
+          </button>
         </div>
       </header>
 
@@ -79,8 +91,10 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Login.propTypes = {
-  tokenRequest: PropTypes.func.isRequired,
-
-};
+  tokenRequest: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+}.isRequired;
 
 export default connect(null, mapDispatchToProps)(Login);
