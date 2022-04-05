@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import logo from '../trivia.png';
 import { fetchAPI } from '../redux/actions';
 
@@ -76,5 +77,10 @@ class Login extends Component {
 const mapDispatchToProps = (dispatch) => ({
   tokenRequest: () => dispatch(fetchAPI()),
 });
+
+Login.propTypes = {
+  tokenRequest: PropTypes.func.isRequired,
+
+};
 
 export default connect(null, mapDispatchToProps)(Login);
