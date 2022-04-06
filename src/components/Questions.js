@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { fetchApiTrivia } from '../redux/actions';
 import { fetchApiToken } from '../redux/actions';
+import QuestionCard from './QuestionCard';
 
 class Questions extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Questions extends Component {
   }
 
   componentDidMount() {
-    this.getQuestions();
+    this.gameStart();
   }
 
   fetchApiTrivia = async (token, quantity) => {
@@ -28,9 +29,15 @@ class Questions extends Component {
     }
   }
 
+  gameStart = () => {
+    const questions = this.getQuestions();
+    this.setState({
+      questionsArray: questions.results,
+    });
+  }
+
   getQuestions = async () => {
-    const { token, quantity, dispatch} = this.props;
-    console.log(token);
+    const { token, quantity, dispatch } = this.props;
     const questions = await this.fetchApiTrivia(token, quantity);
     const RESPONSE_CODE = 3;
     if (questions.response_code === RESPONSE_CODE) {
@@ -38,14 +45,15 @@ class Questions extends Component {
       const retryQuestions = await this.fetchApiTrivia(token, quantity);
       return retryQuestions;
     }
-    console.log(questions);
     return questions;
   }
 
   render() {
+    const { questionsArray, indexArray } = this.state;
+    const currentQuestion = questionsArray[indexArray];
     return (
       <div className="questions-container">
-        Questions
+        <QuestionCard currentQuestion={ currentQuestion } />
       </div>
     );
   }
