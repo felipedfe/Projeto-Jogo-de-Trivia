@@ -12,20 +12,24 @@ class HeaderPlay extends Component {
           src={ img }
           alt={ `${name}-avatar` }
         />
-        <h2>
-          { 'Player: '(
-            <span
-              data-testid="header-player-name"
-            >
-              {name}
-            </span>,
-          ) }
-        </h2>
-        <h1>
-          { 'Score: '(
-            <span>{score}</span>,
-          ) }
-        </h1>
+        <p>
+          Player:
+          {' '}
+          <span
+            data-testid="header-player-name"
+          >
+            {name}
+          </span>
+        </p>
+        <p>
+          Score:
+          {' '}
+          <span
+            data-testid="header-score"
+          >
+            {score}
+          </span>
+        </p>
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import HeaderPlay from '../components/HeaderPlay';
 
+import '../styles/gameboard.css';
+
 class GameBoard extends Component {
   render() {
     return (

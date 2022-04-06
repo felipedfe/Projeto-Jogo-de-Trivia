@@ -40,7 +40,6 @@ class Login extends Component {
     const { name, email } = this.state;
 
     const emailHash = md5(email).toString();
-    console.log(name);
     savePlayerData(name, emailHash);
   }
 
