@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 
 import { connect } from 'react-redux';
-import { fetchApiToken, fetchApiGravatar } from '../redux/actions';
+import { fetchApiToken, actionGetPlayerData } from '../redux/actions';
 
 import logo from '../trivia.png';
 
@@ -35,17 +35,20 @@ class Login extends Component {
     this.setState({ [name]: value }, () => this.inputValidation());
   }
 
-  gravatarHandler = () => {
-    const { email, gravatarRequest } = this.props;
+  loadingPlayerData = () => {
+    const { savePlayerData } = this.props;
+    const { name, email } = this.state;
 
     const emailHash = md5(email).toString();
-    gravatarRequest(emailHash);
+    console.log(name);
+    savePlayerData(name, emailHash);
   }
 
   playBtn = () => {
-    const { tokenRequest } = this.props;
+    const { tokenRequest, history } = this.props;
     tokenRequest();
-    gravatarHandler();
+    this.loadingPlayerData();
+    history.push('/gameboard');
   }
 
   settingsBtn = () => {
@@ -99,7 +102,7 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   tokenRequest: () => dispatch(fetchApiToken()),
-  gravatarRequest: (hash) => dispatch(fetchApiGravatar(hash)),
+  savePlayerData: (playerName, hash) => dispatch(actionGetPlayerData(playerName, hash)),
 });
 
 Login.propTypes = {
@@ -107,7 +110,7 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
-  gravatarRequest: PropTypes.func,
+  savePlayerData: PropTypes.string,
 }.isRequired;
 
 export default connect(null, mapDispatchToProps)(Login);

@@ -1,8 +1,15 @@
 export const GET_TOKEN = 'GET_TOKEN';
+export const GET_PLAYER_DATA = 'GET_PLAYER_DATA';
 
 export const actionGetToken = (data) => ({
   type: GET_TOKEN,
   data,
+});
+
+export const actionGetPlayerData = (playerName, hash) => ({
+  type: GET_PLAYER_DATA,
+  playerName,
+  hash,
 });
 
 export const fetchApiToken = () => async (dispatch) => {
@@ -12,15 +19,5 @@ export const fetchApiToken = () => async (dispatch) => {
     dispatch(actionGetToken(data));
   } catch (error) {
     console.log(`Erro encontrado Token API: ${error}`); // Provisório
-  }
-};
-
-export const fetchApiGravatar = (hash) => async (dispatch) => {
-  try {
-    const response = await fetch(`https://br.gravatar.com/site/implement/${hash}/`);
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.log(`Erro encontrado Gravatar API ${error}`);
   }
 };
