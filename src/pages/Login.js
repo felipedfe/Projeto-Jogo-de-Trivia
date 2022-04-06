@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../trivia.png';
-import { fetchAPI } from '../redux/actions';
+import { fetchApiToken } from '../redux/actions';
 
 class Login extends Component {
   constructor(props) {
@@ -87,7 +87,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  tokenRequest: () => dispatch(fetchAPI()),
+  tokenRequest: () => dispatch(fetchApiToken()),
 });
 
 Login.propTypes = {

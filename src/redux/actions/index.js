@@ -5,7 +5,7 @@ export const actionGetToken = (data) => ({
   data,
 });
 
-export const fetchAPI = () => async (dispatch) => {
+export const fetchApiToken = () => async (dispatch) => {
   try {
     const response = await fetch('https://opentdb.com/api_token.php?command=request');
     const data = await response.json();
