@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import md5 from 'crypto-js/md5';
+
+import { connect } from 'react-redux';
+import { fetchApiToken, fetchApiGravatar } from '../redux/actions';
+
 import logo from '../trivia.png';
-import { fetchApiToken } from '../redux/actions';
 
 class Login extends Component {
   constructor(props) {
@@ -32,9 +35,17 @@ class Login extends Component {
     this.setState({ [name]: value }, () => this.inputValidation());
   }
 
+  gravatarHandler = () => {
+    const { email, gravatarRequest } = this.props;
+
+    const emailHash = md5(email).toString();
+    gravatarRequest(emailHash);
+  }
+
   playBtn = () => {
     const { tokenRequest } = this.props;
     tokenRequest();
+    gravatarHandler();
   }
 
   settingsBtn = () => {
@@ -88,6 +99,7 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   tokenRequest: () => dispatch(fetchApiToken()),
+  gravatarRequest: (hash) => dispatch(fetchApiGravatar(hash)),
 });
 
 Login.propTypes = {
@@ -95,6 +107,7 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
+  gravatarRequest: PropTypes.func,
 }.isRequired;
 
 export default connect(null, mapDispatchToProps)(Login);
