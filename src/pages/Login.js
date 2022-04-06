@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import md5 from 'crypto-js/md5';
+
+import { connect } from 'react-redux';
+import { fetchApiToken, actionGetPlayerData } from '../redux/actions';
+
 import logo from '../trivia.png';
-import { fetchAPI } from '../redux/actions';
 
 class Login extends Component {
   constructor(props) {
@@ -32,9 +35,19 @@ class Login extends Component {
     this.setState({ [name]: value }, () => this.inputValidation());
   }
 
+  loadingPlayerData = () => {
+    const { savePlayerData } = this.props;
+    const { name, email } = this.state;
+
+    const emailHash = md5(email).toString();
+    savePlayerData(name, emailHash);
+  }
+
   playBtn = () => {
-    const { tokenRequest } = this.props;
+    const { tokenRequest, history } = this.props;
     tokenRequest();
+    this.loadingPlayerData();
+    history.push('/gameboard');
   }
 
   settingsBtn = () => {
@@ -87,7 +100,8 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  tokenRequest: () => dispatch(fetchAPI()),
+  tokenRequest: () => dispatch(fetchApiToken()),
+  savePlayerData: (playerName, hash) => dispatch(actionGetPlayerData(playerName, hash)),
 });
 
 Login.propTypes = {
@@ -95,6 +109,7 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
+  savePlayerData: PropTypes.string,
 }.isRequired;
 
 export default connect(null, mapDispatchToProps)(Login);
