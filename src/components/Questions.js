@@ -11,6 +11,7 @@ class Questions extends Component {
     this.state = {
       questionsArray: [],
       indexArray: 0,
+      loading: true,
       // nextDisable: true,
     };
   }
@@ -29,10 +30,12 @@ class Questions extends Component {
     }
   }
 
-  gameStart = () => {
-    const questions = this.getQuestions();
+  gameStart = async () => {
+    const questions = await this.getQuestions();
+    console.log(questions);
     this.setState({
       questionsArray: questions.results,
+      loading: false,
     });
   }
 
@@ -49,23 +52,28 @@ class Questions extends Component {
   }
 
   render() {
-    const { questionsArray, indexArray } = this.state;
+    const { questionsArray, indexArray, loading } = this.state;
     const currentQuestion = questionsArray[indexArray];
+    console.log(questionsArray[0]);
     return (
       <div className="questions-container">
-        <QuestionCard currentQuestion={ currentQuestion } />
+        { loading
+          ? null
+          : <QuestionCard currentQuestion={ currentQuestion } />}
       </div>
     );
   }
 }
 
-/* const mapDispatchToProps = (dispatch) => ({
-  questions: (token, quantity) => dispatch(fetchApiTrivia(token, quantity)),
-}); */
-
 const mapStateToProps = (state) => ({
   token: state.token,
   quantity: state.settings.quantity,
 });
+
+Questions.propTypes = {
+  dispatch: PropTypes.func,
+  quantity: PropTypes.number,
+  token: PropTypes.string,
+}.isRequired;
 
 export default connect(mapStateToProps)(Questions);
