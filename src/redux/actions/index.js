@@ -6,7 +6,11 @@ export const actionGetToken = (data) => ({
 });
 
 export const fetchAPI = () => async (dispatch) => {
-  const response = await fetch('https://opentdb.com/api_token.php?command=request');
-  const data = await response.json();
-  dispatch(actionGetToken(data));
+  try {
+    const response = await fetch('https://opentdb.com/api_token.php?command=request');
+    const data = await response.json();
+    dispatch(actionGetToken(data));
+  } catch (error) {
+    console.log(`Erro encontrado: ${error}`); // Provisório
+  }
 };
