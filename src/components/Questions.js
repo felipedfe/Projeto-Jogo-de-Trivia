@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { fetchApiTrivia } from '../redux/actions';
-import { fetchApiToken } from '../redux/actions';
+import { fetchApiToken, actionGetQuestions } from '../redux/actions';
 import QuestionCard from './QuestionCard';
 
 class Questions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionsArray: [],
-      indexArray: 0,
       loading: true,
       // nextDisable: true,
     };
@@ -31,12 +29,13 @@ class Questions extends Component {
   }
 
   gameStart = async () => {
+    const { saveQuestions } = this.props;
     const questions = await this.getQuestions();
-    console.log(questions);
+    // console.log(questions);
     this.setState({
-      questionsArray: questions.results,
       loading: false,
     });
+    saveQuestions(questions);
   }
 
   getQuestions = async () => {
@@ -52,14 +51,12 @@ class Questions extends Component {
   }
 
   render() {
-    const { questionsArray, indexArray, loading } = this.state;
-    const currentQuestion = questionsArray[indexArray];
-    console.log(questionsArray[0]);
+    const { loading } = this.state;
     return (
       <div className="questions-container">
-        { loading
-          ? null
-          : <QuestionCard currentQuestion={ currentQuestion } />}
+        {loading
+          ? <h1>LOADING...</h1>
+          : <QuestionCard />}
       </div>
     );
   }
@@ -70,10 +67,14 @@ const mapStateToProps = (state) => ({
   quantity: state.settings.quantity,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  saveQuestions: (questions) => dispatch(actionGetQuestions(questions)),
+});
+
 Questions.propTypes = {
   dispatch: PropTypes.func,
   quantity: PropTypes.number,
   token: PropTypes.string,
 }.isRequired;
 
-export default connect(mapStateToProps)(Questions);
+export default connect(mapStateToProps, mapDispatchToProps)(Questions);

@@ -1,6 +1,6 @@
 export const GET_TOKEN = 'GET_TOKEN';
 export const GET_PLAYER_DATA = 'GET_PLAYER_DATA';
-// export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const GET_QUESTIONS = 'GET_QUESTIONS';
 
 export const actionGetToken = (data) => ({
   type: GET_TOKEN,
@@ -13,10 +13,10 @@ export const actionGetPlayerData = (playerName, hash) => ({
   hash,
 });
 
-/* export const actionGetQuestions = (data) => ({
+export const actionGetQuestions = (data) => ({
   type: GET_QUESTIONS,
   data,
-}); */
+});
 
 export const fetchApiToken = () => async (dispatch) => {
   try {
