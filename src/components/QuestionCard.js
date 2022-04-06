@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 class QuestionCard extends Component {
   answers = (correctAnswer, incorrectAnswers) => {
@@ -28,14 +27,10 @@ class QuestionCard extends Component {
   }
 
   render() {
-    // const { questions } = this.props;
-    // console.log(questions[0]);
-    // const {
-    //   correct_answer: correctAnswer,
-    //   incorrect_answers: incorrectAnswers,
-    //   category,
-    //   question } = questions[0];
-    // console.log(this.props);
+    const { currentQuestion: {
+      correct_answer: correctAnswer,
+      incorrect_answers: incorrectAnswers,
+      category, question } } = this.props;
     return (
       <div className="question-container">
         <h2 data-testid="question-category">{ category }</h2>
@@ -46,10 +41,6 @@ class QuestionCard extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  questions: state.questions,
-});
-
 QuestionCard.propTypes = {
   incorrect_answer: PropTypes.arrayOf(PropTypes.string),
   correct_answers: PropTypes.string,
@@ -57,4 +48,4 @@ QuestionCard.propTypes = {
   question: PropTypes.string,
 }.isRequired;
 
-export default connect(mapStateToProps)(QuestionCard);
+export default QuestionCard;

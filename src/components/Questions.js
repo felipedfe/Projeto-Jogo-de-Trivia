@@ -10,6 +10,7 @@ class Questions extends Component {
     super(props);
     this.state = {
       loading: true,
+      indexPosition: 0,
       // nextDisable: true,
     };
   }
@@ -32,10 +33,10 @@ class Questions extends Component {
     const { saveQuestions } = this.props;
     const questions = await this.getQuestions();
     // console.log(questions);
+    saveQuestions(questions);
     this.setState({
       loading: false,
     });
-    saveQuestions(questions);
   }
 
   getQuestions = async () => {
@@ -51,12 +52,14 @@ class Questions extends Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, indexPosition } = this.state;
+    const { questions } = this.props;
+    const currentQuestion = questions[indexPosition];
     return (
       <div className="questions-container">
         {loading
           ? <h1>LOADING...</h1>
-          : <QuestionCard />}
+          : <QuestionCard currentQuestion={ currentQuestion } />}
       </div>
     );
   }
@@ -65,6 +68,7 @@ class Questions extends Component {
 const mapStateToProps = (state) => ({
   token: state.token,
   quantity: state.settings.quantity,
+  questions: state.questions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
