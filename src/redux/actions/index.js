@@ -11,6 +11,16 @@ export const fetchApiToken = () => async (dispatch) => {
     const data = await response.json();
     dispatch(actionGetToken(data));
   } catch (error) {
-    console.log(`Erro encontrado: ${error}`); // Provisório
+    console.log(`Erro encontrado Token API: ${error}`); // Provisório
+  }
+};
+
+export const fetchApiGravatar = (hash) => async (dispatch) => {
+  try {
+    const response = await fetch(`https://br.gravatar.com/site/implement/${hash}/`);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log(`Erro encontrado Gravatar API ${error}`);
   }
 };
