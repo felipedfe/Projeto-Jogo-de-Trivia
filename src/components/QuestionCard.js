@@ -2,14 +2,31 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class QuestionCard extends Component {
-  answers = (correctAnswer, incorrectAnswers) => {
-    const SHUFFLE_NUMBER = 0.5;
-    const allAnswers = [correctAnswer, ...incorrectAnswers]
-      .sort(() => Math.random() - SHUFFLE_NUMBER); // https://flaviocopes.com/how-to-shuffle-array-javascript/
+  constructor(props) {
+    super(props);
+    this.state = {
+      clickedAnswer: false,
+    };
+  }
+
+  answerHandler = () => {
+    this.setState({
+      clickedAnswer: true,
+    });
+  }
+
+  answers = (shuffleAnswer, correctAnswer, incorrectAnswers) => {
+    const { clickedAnswer } = this.state;
+    // const SHUFFLE_NUMBER = 0.5;
+    // const allAnswers = [correctAnswer, ...incorrectAnswers]
+    //   .sort(() => Math.random() - SHUFFLE_NUMBER); // https://flaviocopes.com/how-to-shuffle-array-javascript/
     return (
       <div data-testid="answer-options">
-        {allAnswers.map((answer) => {
+        {shuffleAnswer.map((answer) => {
           const incorrectIndex = incorrectAnswers.indexOf(answer);
+          const classLabel = answer === correctAnswer
+            ? 'correctAnswer'
+            : 'incorretAnswer';
           const dataTestLabel = answer === correctAnswer
             ? 'correct-answer'
             : `wrong-answer-${incorrectIndex}`;
@@ -18,6 +35,8 @@ class QuestionCard extends Component {
               key={ answer }
               type="button"
               data-testid={ dataTestLabel }
+              className={ clickedAnswer ? classLabel : '' }
+              onClick={ this.answerHandler }
             >
               {answer}
             </button>);
@@ -30,12 +49,12 @@ class QuestionCard extends Component {
     const { currentQuestion: {
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers,
-      category, question } } = this.props;
+      category, question }, shuffleAnswer } = this.props;
     return (
       <div className="question-container">
         <h2 data-testid="question-category">{ category }</h2>
         <h1 data-testid="question-text">{ question }</h1>
-        {this.answers(correctAnswer, incorrectAnswers)}
+        {this.answers(shuffleAnswer, correctAnswer, incorrectAnswers)}
       </div>
     );
   }
