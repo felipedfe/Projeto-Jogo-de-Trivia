@@ -10,10 +10,34 @@ class QuestionCard extends Component {
     };
   }
 
-  answerHandler = () => {
+  difficultyHandler = (difficulty) => {
+    const hardPoint = 3;
+    const mediumPoint = 2;
+    const easyPoint = 1;
+
+    switch (difficulty) {
+    case 'hard':
+      return hardPoint;
+    case 'medium':
+      return mediumPoint;
+    default:
+      return easyPoint;
+    }
+  }
+
+  scoreHandler = (answer) => {
+    if (answer === 'correctAnswer') {
+      const { currentQuestion: { difficulty } } = this.props;
+      const difficultyScale = this.difficultyHandler(difficulty);
+      console.log(difficultyScale); // somente para tirar o erro
+    }
+  }
+
+  answerHandler = (answer) => {
     this.setState({
       clickedAnswer: true,
     });
+    this.scoreHandler(answer);
   }
 
   answers = (shuffleAnswer, correctAnswer, incorrectAnswers) => {
@@ -36,7 +60,7 @@ class QuestionCard extends Component {
               disabled={ timer === 0 }
               data-testid={ dataTestLabel }
               className={ clickedAnswer ? classLabel : '' }
-              onClick={ this.answerHandler }
+              onClick={ () => this.answerHandler(classLabel) }
             >
               {answer}
             </button>);
