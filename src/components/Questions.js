@@ -2,14 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import QuestionCard from './QuestionCard';
+import { actionResetTimer } from '../redux/actions';
 
 class Questions extends Component {
   constructor(props) {
     super(props);
     this.state = {
       indexPosition: 0,
-      // nextDisable: true,
     };
+  }
+
+  nextHandler = () => {
+    const { indexPosition } = this.state;
+    const { questions: { results }, history, resetTime } = this.props;
+    const MAX_LENGTH = results.length - 1;
+    if (indexPosition === MAX_LENGTH) {
+      history.push('/feedback');
+    } else {
+      resetTime();
+      this.setState((prevState) => ({
+        indexPosition: prevState.indexPosition + 1,
+      }));
+    }
   }
 
   shuffleAnswers = (currentQuestion) => {
@@ -31,7 +45,15 @@ class Questions extends Component {
           currentQuestion={ currentQuestion }
           shuffleAnswer={ shuffleAnswer }
         />
-        { stopTimer && <button type="button" data-testid="btn-next">Next</button> }
+        { stopTimer && (
+          <button
+            type="button"
+            data-testid="btn-next"
+            onClick={ this.nextHandler }
+          >
+            Next
+          </button>
+        ) }
       </div>
     );
   }
@@ -42,10 +64,14 @@ const mapStateToProps = (state) => ({
   stopTimer: state.timer.stopTimer,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  resetTime: () => dispatch(actionResetTimer()),
+});
+
 Questions.propTypes = {
   dispatch: PropTypes.func,
   quantity: PropTypes.number,
   token: PropTypes.string,
 }.isRequired;
 
-export default connect(mapStateToProps)(Questions);
+export default connect(mapStateToProps, mapDispatchToProps)(Questions);
