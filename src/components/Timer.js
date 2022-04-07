@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actionChangeTimer } from '../redux/actions';
+import { actionChangeTimer, actionStopTimer } from '../redux/actions';
 
 class Timer extends Component {
   constructor() {
@@ -20,10 +20,11 @@ class Timer extends Component {
   }
 
   countdown = () => {
-    const { timer, changeTimer, stopTimer } = this.props;
+    const { timer, changeTimer, stopTimer, breakTime } = this.props;
     const { timerId } = this.state;
     if (timer === 0 || stopTimer) {
       clearInterval(timerId);
+      breakTime();
     } else {
       changeTimer();
     }
@@ -43,6 +44,7 @@ Timer.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   changeTimer: (time) => dispatch(actionChangeTimer(time)),
+  breakTime: () => dispatch(actionStopTimer()),
 });
 
 const mapStateToProps = (state) => ({

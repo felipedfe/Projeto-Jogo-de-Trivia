@@ -27,14 +27,14 @@ class QuestionCard extends Component {
   }
 
   scoreHandler = (answer) => {
+    const { currentQuestion: { difficulty }, sendScore, timer, breakTime } = this.props;
     if (answer === 'correctAnswer') {
-      const { currentQuestion: { difficulty }, sendScore, timer, breakTime } = this.props;
       const MIN_SCORE = 10;
       const difficultyScale = this.difficultyHandler(difficulty);
       const score = MIN_SCORE + (timer * difficultyScale);
       sendScore(score);
-      breakTime();
     }
+    breakTime();
   }
 
   answerHandler = (answer) => {

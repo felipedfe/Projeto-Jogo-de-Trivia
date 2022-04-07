@@ -22,7 +22,7 @@ class Questions extends Component {
 
   render() {
     const { indexPosition } = this.state;
-    const { questions: { results } } = this.props;
+    const { questions: { results }, stopTimer } = this.props;
     const currentQuestion = results[indexPosition];
     const shuffleAnswer = this.shuffleAnswers(currentQuestion);
     return (
@@ -31,6 +31,7 @@ class Questions extends Component {
           currentQuestion={ currentQuestion }
           shuffleAnswer={ shuffleAnswer }
         />
+        { stopTimer && <button type="button" data-testid="btn-next">Next</button> }
       </div>
     );
   }
@@ -38,6 +39,7 @@ class Questions extends Component {
 
 const mapStateToProps = (state) => ({
   questions: state.questions,
+  stopTimer: state.timer.stopTimer,
 });
 
 Questions.propTypes = {
