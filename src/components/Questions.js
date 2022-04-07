@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import QuestionCard from './QuestionCard';
-import { actionResetTimer } from '../redux/actions';
+import { actionResetTimer, actionColorUpdate } from '../redux/actions';
 
 class Questions extends Component {
   constructor(props) {
@@ -14,12 +14,13 @@ class Questions extends Component {
 
   nextHandler = () => {
     const { indexPosition } = this.state;
-    const { questions: { results }, history, resetTime } = this.props;
+    const { questions: { results }, history, resetTime, updateColor } = this.props;
     const MAX_LENGTH = results.length - 1;
     if (indexPosition === MAX_LENGTH) {
       history.push('/feedback');
     } else {
       resetTime();
+      updateColor(false);
       this.setState((prevState) => ({
         indexPosition: prevState.indexPosition + 1,
       }));
@@ -60,12 +61,13 @@ class Questions extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  questions: state.questions,
+  questions: state.questions.questionsData,
   stopTimer: state.timer.stopTimer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   resetTime: () => dispatch(actionResetTimer()),
+  updateColor: (colorAnswer) => dispatch(actionColorUpdate(colorAnswer)),
 });
 
 Questions.propTypes = {
