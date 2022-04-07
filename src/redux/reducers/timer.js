@@ -1,4 +1,4 @@
-import { CHANGE_TIMER, STOP_TIMER } from '../actions';
+import { CHANGE_TIMER, STOP_TIMER, RESET_TIMER } from '../actions';
 
 const INITIAL_STATE = {
   count: 30,
@@ -16,6 +16,12 @@ const timer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       stopTimer: true,
+    };
+  case RESET_TIMER:
+    return {
+      ...state,
+      stopTimer: false,
+      count: 30,
     };
   default:
     return state;

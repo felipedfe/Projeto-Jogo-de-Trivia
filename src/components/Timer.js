@@ -12,6 +12,19 @@ class Timer extends Component {
   }
 
   componentDidMount() {
+    this.startTimer();
+  }
+
+  componentDidUpdate() {
+    const { timerId } = this.state;
+    const { timer } = this.props;
+    const START_COUNT = 30;
+    if (timer === START_COUNT && !timerId) {
+      this.startTimer();
+    }
+  }
+
+  startTimer = () => {
     const ONESECOND = 1000;
     const timerId = setInterval(this.countdown, ONESECOND);
     this.setState({
@@ -25,6 +38,9 @@ class Timer extends Component {
     if (timer === 0 || stopTimer) {
       clearInterval(timerId);
       breakTime();
+      this.setState({
+        timerId: undefined,
+      });
     } else {
       changeTimer();
     }

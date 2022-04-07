@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actionScore, actionStopTimer } from '../redux/actions';
+import { actionScore, actionStopTimer, actionColorUpdate } from '../redux/actions';
 
 class QuestionCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      clickedAnswer: false,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     clickedAnswer: false,
+  //   };
+  // }
 
   difficultyHandler = (difficulty) => {
     const hardPoint = 3;
@@ -38,15 +38,17 @@ class QuestionCard extends Component {
   }
 
   answerHandler = (answer) => {
-    this.setState({
-      clickedAnswer: true,
-    });
+    // this.setState({
+    //   clickedAnswer: true,
+    // });
+    const { updateColor } = this.props;
+    updateColor(true);
     this.scoreHandler(answer);
   }
 
   answers = (shuffleAnswer, correctAnswer, incorrectAnswers) => {
-    const { clickedAnswer } = this.state;
-    const { timer } = this.props;
+    // const { clickedAnswer } = this.state;
+    const { timer, clickedAnswer } = this.props;
     return (
       <div data-testid="answer-options">
         {shuffleAnswer.map((answer) => {
@@ -97,11 +99,13 @@ QuestionCard.propTypes = {
 
 const mapStateToProps = (state) => ({
   timer: state.timer.count,
+  clickedAnswer: state.questions.colorAnswer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   sendScore: (score) => dispatch(actionScore(score)),
   breakTime: () => dispatch(actionStopTimer()),
+  updateColor: (colorAnswer) => dispatch(actionColorUpdate(colorAnswer)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionCard);
