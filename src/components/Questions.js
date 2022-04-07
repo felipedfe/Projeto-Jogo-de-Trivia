@@ -12,13 +12,25 @@ class Questions extends Component {
     };
   }
 
+  shuffleAnswers = (currentQuestion) => {
+    const { correct_answer: correctAnswer,
+      incorrect_answers: incorrectAnswers } = currentQuestion;
+    const SHUFFLE_NUMBER = 0.5;
+    return [correctAnswer, ...incorrectAnswers]
+      .sort(() => Math.random() - SHUFFLE_NUMBER); // https://flaviocopes.com/how-to-shuffle-array-javascript/
+  }
+
   render() {
     const { indexPosition } = this.state;
     const { questions: { results } } = this.props;
     const currentQuestion = results[indexPosition];
+    const shuffleAnswer = this.shuffleAnswers(currentQuestion);
     return (
       <div className="questions-container">
-        <QuestionCard currentQuestion={ currentQuestion } />
+        <QuestionCard
+          currentQuestion={ currentQuestion }
+          shuffleAnswer={ shuffleAnswer }
+        />
       </div>
     );
   }
