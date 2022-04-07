@@ -19,9 +19,6 @@ class QuestionCard extends Component {
   answers = (shuffleAnswer, correctAnswer, incorrectAnswers) => {
     const { clickedAnswer } = this.state;
     const { timer } = this.props;
-    // const SHUFFLE_NUMBER = 0.5;
-    // const allAnswers = [correctAnswer, ...incorrectAnswers]
-    //   .sort(() => Math.random() - SHUFFLE_NUMBER); // https://flaviocopes.com/how-to-shuffle-array-javascript/
     return (
       <div data-testid="answer-options">
         {shuffleAnswer.map((answer) => {
