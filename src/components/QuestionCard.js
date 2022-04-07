@@ -7,7 +7,7 @@ class QuestionCard extends Component {
     const allAnswers = [correctAnswer, ...incorrectAnswers]
       .sort(() => Math.random() - SHUFFLE_NUMBER); // https://flaviocopes.com/how-to-shuffle-array-javascript/
     return (
-      <div>
+      <div data-testid="answer-options">
         {allAnswers.map((answer) => {
           const incorrectIndex = incorrectAnswers.indexOf(answer);
           const dataTestLabel = answer === correctAnswer

@@ -20,8 +20,10 @@ class Login extends Component {
   }
 
   componentDidUpdate() {
-    const { token, quantity, saveQuestions, questions } = this.props;
-    if (!questions.results) saveQuestions(token, quantity);
+    const { token, quantity, saveQuestions, questions, history } = this.props;
+
+    if (token) saveQuestions(token, quantity);
+    if (questions.results) history.push('/gameboard');
   }
 
   inputValidation = () => {
@@ -50,10 +52,9 @@ class Login extends Component {
   }
 
   playBtn = () => {
-    const { tokenRequest, history } = this.props;
+    const { tokenRequest } = this.props;
     tokenRequest();
     this.loadingPlayerData();
-    history.push('/gameboard');
   }
 
   settingsBtn = () => {
