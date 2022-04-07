@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { actionScore, actionStopTimer } from '../redux/actions';
 
 class QuestionCard extends Component {
   constructor(props) {
@@ -27,9 +28,12 @@ class QuestionCard extends Component {
 
   scoreHandler = (answer) => {
     if (answer === 'correctAnswer') {
-      const { currentQuestion: { difficulty } } = this.props;
+      const { currentQuestion: { difficulty }, sendScore, timer, breakTime } = this.props;
+      const MIN_SCORE = 10;
       const difficultyScale = this.difficultyHandler(difficulty);
-      console.log(difficultyScale); // somente para tirar o erro
+      const score = MIN_SCORE + (timer * difficultyScale);
+      sendScore(score);
+      breakTime();
     }
   }
 
@@ -92,7 +96,12 @@ QuestionCard.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  timer: state.timer,
+  timer: state.timer.count,
 });
 
-export default connect(mapStateToProps)(QuestionCard);
+const mapDispatchToProps = (dispatch) => ({
+  sendScore: (score) => dispatch(actionScore(score)),
+  breakTime: () => dispatch(actionStopTimer()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionCard);

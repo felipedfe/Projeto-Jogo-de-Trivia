@@ -20,13 +20,12 @@ class Timer extends Component {
   }
 
   countdown = () => {
-    const { timer, changeTimer } = this.props;
+    const { timer, changeTimer, stopTimer } = this.props;
     const { timerId } = this.state;
-    if (timer === 0) {
+    if (timer === 0 || stopTimer) {
       clearInterval(timerId);
     } else {
-      changeTimer(timer);
-      console.log(timer);
+      changeTimer();
     }
   }
 
@@ -47,7 +46,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  timer: state.timer,
+  timer: state.timer.count,
+  stopTimer: state.timer.stopTimer,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

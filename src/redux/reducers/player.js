@@ -1,4 +1,4 @@
-import { GET_PLAYER_DATA } from '../actions';
+import { GET_PLAYER_DATA, GET_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -17,6 +17,11 @@ const player = (state = INITIAL_STATE, action) => {
       gravatarEmail: gravatarURL,
     };
   }
+  case GET_SCORE:
+    return {
+      ...state,
+      score: state.score + action.score,
+    };
   default:
     return state;
   }
