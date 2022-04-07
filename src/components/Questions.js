@@ -2,78 +2,76 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { fetchApiTrivia } from '../redux/actions';
-import { fetchApiToken, actionGetQuestions } from '../redux/actions';
+// import { fetchApiToken, actionGetQuestions } from '../redux/actions';
 import QuestionCard from './QuestionCard';
 
 class Questions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      // loading: true,
       indexPosition: 0,
       // nextDisable: true,
     };
   }
 
-  componentDidMount() {
-    this.gameStart();
-  }
+  // componentDidMount() {
+  //   this.gameStart();
+  // }
 
-  fetchApiTrivia = async (token, quantity) => {
-    try {
-      const response = await fetch(`https://opentdb.com/api.php?amount=${quantity}&token=${token}`);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.log(`Erro encontrado Token API: ${error}`); // Provisório
-    }
-  }
+  // fetchApiTrivia = async (token, quantity) => {
+  //   try {
+  //     const response = await fetch(`https://opentdb.com/api.php?amount=${quantity}&token=${token}`);
+  //     const data = await response.json();
+  //     return data;
+  //   } catch (error) {
+  //     console.log(`Erro encontrado Token API: ${error}`); // Provisório
+  //   }
+  // }
 
-  gameStart = async () => {
-    const { saveQuestions } = this.props;
-    const questions = await this.getQuestions();
-    // console.log(questions);
-    saveQuestions(questions);
-    this.setState({
-      loading: false,
-    });
-  }
+  // gameStart = async () => {
+  //   const { saveQuestions } = this.props;
+  //   const questions = await this.getQuestions();
+  // console.log(questions);
+  // saveQuestions(questions);
+  // this.setState({
+  //   loading: false,
+  // });
+  // }
 
-  getQuestions = async () => {
-    const { token, quantity, dispatch } = this.props;
-    const questions = await this.fetchApiTrivia(token, quantity);
-    const RESPONSE_CODE = 3;
-    if (questions.response_code === RESPONSE_CODE) {
-      await dispatch(fetchApiToken());
-      const retryQuestions = await this.fetchApiTrivia(token, quantity);
-      return retryQuestions;
-    }
-    return questions;
-  }
+  // getQuestions = async () => {
+  //   const { token, quantity, dispatch } = this.props;
+  //   const questions = await this.fetchApiTrivia(token, quantity);
+  //   const RESPONSE_CODE = 3;
+  //   if (questions.response_code === RESPONSE_CODE) {
+  //     await dispatch(fetchApiToken());
+  //     const retryQuestions = await this.fetchApiTrivia(token, quantity);
+  //     return retryQuestions;
+  //   }
+  //   return questions;
+  // }
 
   render() {
-    const { loading, indexPosition } = this.state;
-    const { questions } = this.props;
-    const currentQuestion = questions[indexPosition];
+    const { indexPosition } = this.state;
+    const { questions: { results } } = this.props;
+    const currentQuestion = results[indexPosition];
     return (
       <div className="questions-container">
-        {loading
-          ? <h1>LOADING...</h1>
-          : <QuestionCard currentQuestion={ currentQuestion } />}
+        <QuestionCard currentQuestion={ currentQuestion } />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  token: state.token,
-  quantity: state.settings.quantity,
+  // token: state.token,
+  // quantity: state.settings.quantity,
   questions: state.questions,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  saveQuestions: (questions) => dispatch(actionGetQuestions(questions)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   saveQuestions: (questions) => dispatch(actionGetQuestions(questions)),
+// });
 
 Questions.propTypes = {
   dispatch: PropTypes.func,
@@ -81,4 +79,4 @@ Questions.propTypes = {
   token: PropTypes.string,
 }.isRequired;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Questions);
+export default connect(mapStateToProps)(Questions);

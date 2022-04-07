@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 
 import { connect } from 'react-redux';
-import { fetchApiToken, actionGetPlayerData } from '../redux/actions';
+import { actionGetPlayerData } from '../redux/actions';
+import { fetchApiToken, getQuestions } from '../redux/actions/trivia';
 
 import logo from '../trivia.png';
 
@@ -16,6 +17,11 @@ class Login extends Component {
       email: '',
       disableBtn: true,
     };
+  }
+
+  componentDidUpdate() {
+    const { token, quantity, saveQuestions, questions } = this.props;
+    if (!questions.results) saveQuestions(token, quantity);
   }
 
   inputValidation = () => {
@@ -99,9 +105,16 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  token: state.token,
+  quantity: state.settings.quantity,
+  questions: state.questions,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   tokenRequest: () => dispatch(fetchApiToken()),
   savePlayerData: (playerName, hash) => dispatch(actionGetPlayerData(playerName, hash)),
+  saveQuestions: (token, quantity) => dispatch(getQuestions(token, quantity)),
 });
 
 Login.propTypes = {
@@ -112,4 +125,4 @@ Login.propTypes = {
   savePlayerData: PropTypes.string,
 }.isRequired;
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
