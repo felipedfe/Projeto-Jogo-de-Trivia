@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class QuestionCard extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class QuestionCard extends Component {
 
   answers = (shuffleAnswer, correctAnswer, incorrectAnswers) => {
     const { clickedAnswer } = this.state;
+    const { timer } = this.props;
     // const SHUFFLE_NUMBER = 0.5;
     // const allAnswers = [correctAnswer, ...incorrectAnswers]
     //   .sort(() => Math.random() - SHUFFLE_NUMBER); // https://flaviocopes.com/how-to-shuffle-array-javascript/
@@ -34,6 +36,7 @@ class QuestionCard extends Component {
             <button
               key={ answer }
               type="button"
+              disabled={ timer === 0 }
               data-testid={ dataTestLabel }
               className={ clickedAnswer ? classLabel : '' }
               onClick={ this.answerHandler }
@@ -67,4 +70,8 @@ QuestionCard.propTypes = {
   question: PropTypes.string,
 }.isRequired;
 
-export default QuestionCard;
+const mapStateToProps = (state) => ({
+  timer: state.timer,
+});
+
+export default connect(mapStateToProps)(QuestionCard);
