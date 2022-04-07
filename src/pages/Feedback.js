@@ -6,7 +6,7 @@ class Feedback extends Component {
     return (
       <div>
         <HeaderPlay />
-        <p data-testid="feedback-text">Feedback</p>
+        <p data-testid="feedback-text">FeedBack</p>
       </div>
     );
   }
