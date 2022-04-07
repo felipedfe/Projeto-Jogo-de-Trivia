@@ -72,7 +72,7 @@ class Login extends Component {
             name="name"
             data-testid="input-player-name"
             value={ name }
-            placeholder="Nome do Jogador"
+            placeholder="Insert Player Name"
             onChange={ this.inputHandler }
           />
           <input
@@ -80,7 +80,7 @@ class Login extends Component {
             name="email"
             data-testid="input-gravatar-email"
             value={ email }
-            placeholder="E-mail do Jogador"
+            placeholder="Insert Player E-mail"
             onChange={ this.inputHandler }
           />
           <button
