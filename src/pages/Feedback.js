@@ -5,7 +5,7 @@ import HeaderPlay from '../components/HeaderPlay';
 
 class Feedback extends Component {
   render() {
-    const { correctAnswers } = this.props;
+    const { correctAnswers, totalScore } = this.props;
     console.log(correctAnswers);
     const PASSING_SCORE = 3;
     return (
@@ -16,13 +16,35 @@ class Feedback extends Component {
             ? <>Could be better...</>
             : <>Well Done!</>}
         </h2>
+
+        <p>
+          Você acertou um total de
+          {' '}
+          <strong
+            data-testid="feedback-total-question"
+          >
+            {correctAnswers}
+          </strong>
+          {' '}
+          perguntas.
+        </p>
+        <h3>
+          Total de pontos:
+          {' '}
+          <strong
+            data-testid="feedback-total-score"
+          >
+            {totalScore}
+          </strong>
+        </h3>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  correctAnswers: state.questions.correctAnswers,
+  correctAnswers: state.player.assertions,
+  totalScore: state.player.score,
 });
 
 Feedback.propTypes = {
