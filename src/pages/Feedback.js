@@ -8,19 +8,26 @@ class Feedback extends Component {
   constructor() {
     super();
     this.state = {
-      redirect: false,
+      redirectLogin: false,
+      redirectRanking: false,
     };
   }
 
   playAgain = () => {
     this.setState({
-      redirect: true,
+      redirectLogin: true,
+    });
+  }
+
+  goToRanking = () => {
+    this.setState({
+      redirectRanking: true,
     });
   }
 
   render() {
     const { correctAnswers, totalScore } = this.props;
-    const { redirect } = this.state;
+    const { redirectLogin, redirectRanking } = this.state;
     console.log(correctAnswers);
     const PASSING_SCORE = 3;
     return (
@@ -53,14 +60,21 @@ class Feedback extends Component {
           </strong>
         </h3>
         <button
-          link="/"
           type="button"
           data-testid="btn-play-again"
           onClick={ this.playAgain }
         >
           Play Again
         </button>
-        { redirect && <Redirect to="/" /> }
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ this.goToRanking }
+        >
+          Ranking
+        </button>
+        { redirectLogin && <Redirect to="/" /> }
+        { redirectRanking && <Redirect to="/ranking" /> }
       </div>
     );
   }
