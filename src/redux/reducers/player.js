@@ -25,7 +25,7 @@ const player = (state = INITIAL_STATE, action) => {
   case ADD_CORRECT_ANSWER:
     return {
       ...state,
-      assertions: state.correctAnswers + 1,
+      assertions: state.assertions + 1,
     };
   default:
     return state;
