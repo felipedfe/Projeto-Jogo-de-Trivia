@@ -10,7 +10,9 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/gameboard" render={ (props) => <GameBoard { ...props } /> } />
+        {/* <Route exact path="/gameboard" render={ (props)
+          => <GameBoard { ...props } /> } /> */}
+        <Route exact path="/gameboard" component={ GameBoard } />
         <Route exact path="/settings" component={ Settings } />
         <Route exact path="/feedback" component={ Feedback } />
         <Route exact path="/" component={ Login } />
