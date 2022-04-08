@@ -1,9 +1,10 @@
 import { GET_QUESTIONS } from '../actions/trivia';
-import { CHANGE_COLOR_BTN } from '../actions';
+import { CHANGE_COLOR_BTN, ADD_CORRECT_ANSWER } from '../actions';
 
 const INITIAL_STATE = {
   questionsData: {},
   colorAnswer: false,
+  correctAnswers: 0,
 };
 
 const questions = (state = INITIAL_STATE, action) => {
@@ -17,6 +18,11 @@ const questions = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       colorAnswer: action.colorAnswer,
+    };
+  case ADD_CORRECT_ANSWER:
+    return {
+      ...state,
+      correctAnswers: state.correctAnswers + 1,
     };
   default:
     return state;
