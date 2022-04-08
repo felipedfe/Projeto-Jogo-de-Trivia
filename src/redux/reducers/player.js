@@ -1,8 +1,8 @@
-import { GET_PLAYER_DATA, GET_SCORE } from '../actions';
+import { GET_PLAYER_DATA, GET_SCORE, ADD_CORRECT_ANSWER } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
-  assertions: '',
+  assertions: 0,
   score: 0,
   gravatarEmail: '',
 };
@@ -21,6 +21,11 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       score: state.score + action.score,
+    };
+  case ADD_CORRECT_ANSWER:
+    return {
+      ...state,
+      assertions: state.correctAnswers + 1,
     };
   default:
     return state;
