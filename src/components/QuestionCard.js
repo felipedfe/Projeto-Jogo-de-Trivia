@@ -75,12 +75,19 @@ class QuestionCard extends Component {
               className={ clickedAnswer ? classLabel : 'answers-standard-button' }
               onClick={ () => this.answerHandler(classLabel) }
             >
-              {answer}
+              {this.escapeHtml(answer)}
             </button>);
         })}
       </div>
     );
   }
+
+  // https://www.educative.io/edpresso/how-to-escape-unescape-html-characters-in-string-in-javascript
+  escapeHtml = (str) => str.replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, '\'')
 
   render() {
     const { currentQuestion: {
@@ -90,7 +97,7 @@ class QuestionCard extends Component {
     return (
       <div className="question-container">
         <h2 data-testid="question-category">{ category }</h2>
-        <h1 data-testid="question-text">{ question }</h1>
+        <h1 data-testid="question-text">{ this.escapeHtml(question) }</h1>
         {this.answers(shuffleAnswer, correctAnswer, incorrectAnswers)}
       </div>
     );
