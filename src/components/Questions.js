@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import QuestionCard from './QuestionCard';
 import { actionResetTimer, actionColorUpdate } from '../redux/actions';
+import '../styles/questions.css';
 
 class Questions extends Component {
   constructor(props) {

@@ -1,0 +1,16 @@
+.questions-container {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  width: 80%;
+}
+
+.correctAnswer {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.incorretAnswer {
+  border: 3px solid red;
+}
