@@ -15,28 +15,28 @@ class Feedback extends Component {
           {correctAnswers < PASSING_SCORE
             ? <>Could be better...</>
             : <>Well Done!</>}
-
-          <p>
-            Você acertou um total de
-            {' '}
-            <strong
-              data-testid="feedback-total-question"
-            >
-              {correctAnswers}
-            </strong>
-            {' '}
-            perguntas.
-          </p>
-          <h3>
-            Total de pontos:
-            {' '}
-            <strong
-              data-testid="feedback-total-score"
-            >
-              {totalScore}
-            </strong>
-          </h3>
         </h2>
+
+        <p>
+          Você acertou um total de
+          {' '}
+          <strong
+            data-testid="feedback-total-question"
+          >
+            {correctAnswers}
+          </strong>
+          {' '}
+          perguntas.
+        </p>
+        <h3>
+          Total de pontos:
+          {' '}
+          <strong
+            data-testid="feedback-total-score"
+          >
+            {totalScore}
+          </strong>
+        </h3>
       </div>
     );
   }
