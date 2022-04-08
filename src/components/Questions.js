@@ -51,6 +51,7 @@ class Questions extends Component {
           <button
             type="button"
             data-testid="btn-next"
+            className="nextBtn"
             onClick={ this.nextHandler }
           >
             Next

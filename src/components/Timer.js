@@ -49,7 +49,7 @@ class Timer extends Component {
   render() {
     const { timer } = this.props;
     return (
-      <p>{ timer }</p>
+      <h1 className="timer-container">{ timer }</h1>
     );
   }
 }

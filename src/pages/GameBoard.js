@@ -12,8 +12,8 @@ class GameBoard extends Component {
     return (
       <div className="gameboard-container">
         <HeaderPlay />
-        <Questions history={ history } />
         <Timer />
+        <Questions history={ history } />
       </div>
     );
   }

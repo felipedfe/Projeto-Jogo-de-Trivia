@@ -51,7 +51,7 @@ body {
 
 .headerplay-container {
   align-items: center;
-  background-color: brown;
+  background-color: #341f97;
   color: white;
   display: flex;
   height: 50px;
@@ -60,5 +60,6 @@ body {
 }
 
 .headerplay-container img {
+  border: 1px solid black;
   height: 100%;
 }

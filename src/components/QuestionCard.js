@@ -54,7 +54,10 @@ class QuestionCard extends Component {
     // const { clickedAnswer } = this.state;
     const { timer, clickedAnswer } = this.props;
     return (
-      <div data-testid="answer-options">
+      <div
+        data-testid="answer-options"
+        className="answers-container"
+      >
         {shuffleAnswer.map((answer) => {
           const incorrectIndex = incorrectAnswers.indexOf(answer);
           const classLabel = answer === correctAnswer
@@ -69,7 +72,7 @@ class QuestionCard extends Component {
               type="button"
               disabled={ timer === 0 }
               data-testid={ dataTestLabel }
-              className={ clickedAnswer ? classLabel : '' }
+              className={ clickedAnswer ? classLabel : 'answers-standard-button' }
               onClick={ () => this.answerHandler(classLabel) }
             >
               {answer}
