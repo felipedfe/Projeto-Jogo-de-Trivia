@@ -4,6 +4,7 @@ export const GET_SCORE = 'GET_SCORE';
 export const STOP_TIMER = 'STOP_TIMER';
 export const RESET_TIMER = 'RESET_TIMER';
 export const CHANGE_COLOR_BTN = 'CHANGE_COLOR_BTN';
+export const ADD_CORRECT_ANSWER = 'ADD_CORRECT_ANSWER';
 
 export const actionGetPlayerData = (playerName, hash) => ({
   type: GET_PLAYER_DATA,
@@ -32,4 +33,9 @@ export const actionResetTimer = () => ({
 export const actionColorUpdate = (colorAnswer) => ({
   type: CHANGE_COLOR_BTN,
   colorAnswer,
+});
+
+export const actionAddCorrectAnswer = (answer) => ({
+  type: ADD_CORRECT_ANSWER,
+  answer,
 });

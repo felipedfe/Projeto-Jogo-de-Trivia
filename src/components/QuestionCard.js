@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actionScore, actionStopTimer, actionColorUpdate } from '../redux/actions';
+import { actionScore,
+  actionStopTimer,
+  actionColorUpdate,
+  actionAddCorrectAnswer } from '../redux/actions';
 
 class QuestionCard extends Component {
   // constructor(props) {
@@ -41,8 +44,9 @@ class QuestionCard extends Component {
     // this.setState({
     //   clickedAnswer: true,
     // });
-    const { updateColor } = this.props;
+    const { updateColor, correctAnswer } = this.props;
     updateColor(true);
+    if (answer === 'correctAnswer') correctAnswer(answer);
     this.scoreHandler(answer);
   }
 
@@ -106,6 +110,7 @@ const mapDispatchToProps = (dispatch) => ({
   sendScore: (score) => dispatch(actionScore(score)),
   breakTime: () => dispatch(actionStopTimer()),
   updateColor: (colorAnswer) => dispatch(actionColorUpdate(colorAnswer)),
+  correctAnswer: (answer) => dispatch(actionAddCorrectAnswer(answer)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionCard);
