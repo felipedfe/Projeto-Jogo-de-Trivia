@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import HeaderPlay from '../components/HeaderPlay';
 
 class Feedback extends Component {
+  constructor() {
+    super();
+    this.state = {
+      redirect: false,
+    };
+  }
+
+  playAgain = () => {
+    this.setState({
+      redirect: true,
+    });
+  }
+
   render() {
     const { correctAnswers, totalScore } = this.props;
+    const { redirect } = this.state;
     console.log(correctAnswers);
     const PASSING_SCORE = 3;
     return (
@@ -37,6 +52,15 @@ class Feedback extends Component {
             {totalScore}
           </strong>
         </h3>
+        <button
+          link="/"
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ this.playAgain }
+        >
+          Play Again
+        </button>
+        { redirect && <Redirect to="/" /> }
       </div>
     );
   }
