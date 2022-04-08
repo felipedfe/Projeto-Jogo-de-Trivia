@@ -8,6 +8,16 @@ import Ranking from './pages/Ranking';
 import './styles/general.css';
 
 class App extends Component {
+  componentDidMount() {
+    this.loadingRanking();
+  }
+
+  loadingRanking = () => {
+    if (!JSON.parse(localStorage.getItem('ranking'))) {
+      localStorage.setItem('ranking', '[]');
+    }
+  };
+
   render() {
     return (
       <Switch>

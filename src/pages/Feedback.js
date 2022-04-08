@@ -13,6 +13,21 @@ class Feedback extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getPlayerInfo();
+  }
+
+  getPlayerInfo = () => {
+    const { totalScore, name, image } = this.props;
+    const playerInfoData = {
+      image,
+      name,
+      totalScore,
+    };
+    const rankingData = JSON.parse(localStorage.getItem('ranking'));
+    localStorage.setItem('ranking', JSON.stringify([...rankingData, playerInfoData]));
+  };
+
   playAgain = () => {
     this.setState({
       redirectLogin: true,
@@ -83,6 +98,8 @@ class Feedback extends Component {
 const mapStateToProps = (state) => ({
   correctAnswers: state.player.assertions,
   totalScore: state.player.score,
+  name: state.player.name,
+  image: state.player.gravatarEmail,
 });
 
 Feedback.propTypes = {

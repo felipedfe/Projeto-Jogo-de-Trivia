@@ -7,8 +7,16 @@ class Ranking extends Component {
     super();
     this.state = {
       redirectLogin: false,
+      // infoRanking: [],
     };
   }
+
+  // loadingFinalRanking = () => {
+  //   const recoverRanking = JSON.parse(localStorage.getItem('ranking'));
+  //   this.setState({
+  //     infoRanking: recoverRanking,
+  //   });
+  // };
 
   playAgain = () => {
     this.setState({
@@ -17,11 +25,20 @@ class Ranking extends Component {
   }
 
   render() {
-    const { redirectLogin } = this.state;
+    const { redirectLogin /* infoRanking */ } = this.state;
     return (
       <div>
         <HeaderPlay />
         <p data-testid="ranking-title">Ranking</p>
+        <ol>
+          {/* {
+          infoRanking.map((info) => (
+            <li>
+              <img scr="" alt=""/>
+           </li>
+          ))
+        } */}
+        </ol>
         <button
           type="button"
           data-testid="btn-go-home"
@@ -29,7 +46,7 @@ class Ranking extends Component {
         >
           Play Again
         </button>
-        { redirectLogin && <Redirect to="/" /> }
+        {redirectLogin && <Redirect to="/" />}
       </div>
     );
   }
