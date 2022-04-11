@@ -21,7 +21,6 @@ class Login extends Component {
 
   componentDidUpdate() {
     const { token, quantity, saveQuestions, questions, history } = this.props;
-
     if (token && !questions.results) saveQuestions(token, quantity);
     if (questions.results) history.push('/gameboard');
   }

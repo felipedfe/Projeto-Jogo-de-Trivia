@@ -5,6 +5,9 @@ export const STOP_TIMER = 'STOP_TIMER';
 export const RESET_TIMER = 'RESET_TIMER';
 export const CHANGE_COLOR_BTN = 'CHANGE_COLOR_BTN';
 export const ADD_CORRECT_ANSWER = 'ADD_CORRECT_ANSWER';
+export const RESET_TOKEN = 'RESET_TOKEN';
+export const RESET_QUESTIONS = 'RESET_QUESTIONS';
+export const RESET_SCORE = 'RESET_SCORE';
 
 export const actionGetPlayerData = (playerName, hash) => ({
   type: GET_PLAYER_DATA,
@@ -38,4 +41,16 @@ export const actionColorUpdate = (colorAnswer) => ({
 export const actionAddCorrectAnswer = (answer) => ({
   type: ADD_CORRECT_ANSWER,
   answer,
+});
+
+export const actionResetToken = () => ({
+  type: RESET_TOKEN,
+});
+
+export const actionResetQuestions = () => ({
+  type: RESET_QUESTIONS,
+});
+
+export const actionResetScore = () => ({
+  type: RESET_SCORE,
 });
