@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import HeaderPlay from '../components/HeaderPlay';
+import {
+  actionResetToken,
+  actionResetQuestions,
+  actionResetScore } from '../redux/actions';
 
 class Feedback extends Component {
   constructor() {
@@ -24,11 +28,19 @@ class Feedback extends Component {
       name,
       totalScore,
     };
-    const rankingData = JSON.parse(localStorage.getItem('ranking'));
+    const rankingData = JSON.parse(localStorage.getItem('ranking')) || [];
     localStorage.setItem('ranking', JSON.stringify([...rankingData, playerInfoData]));
   };
 
+  resetStore = () => {
+    const { resetToken, resetQuestions, resetScore } = this.props;
+    resetToken();
+    resetQuestions();
+    resetScore();
+  }
+
   playAgain = () => {
+    this.resetStore();
     this.setState({
       redirectLogin: true,
     });
@@ -43,7 +55,6 @@ class Feedback extends Component {
   render() {
     const { correctAnswers, totalScore } = this.props;
     const { redirectLogin, redirectRanking } = this.state;
-    console.log(correctAnswers);
     const PASSING_SCORE = 3;
     return (
       <div>
@@ -102,8 +113,14 @@ const mapStateToProps = (state) => ({
   image: state.player.gravatarEmail,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  resetToken: () => dispatch(actionResetToken()),
+  resetQuestions: () => dispatch(actionResetQuestions()),
+  resetScore: () => dispatch(actionResetScore()),
+});
+
 Feedback.propTypes = {
   correctAnswers: PropTypes.number,
 }.isRequired;
 
-export default connect(mapStateToProps)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
