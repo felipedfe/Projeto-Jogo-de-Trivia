@@ -10,7 +10,20 @@ class Questions extends Component {
     super(props);
     this.state = {
       indexPosition: 0,
+      scrambledAnswers: [],
     };
+  }
+
+  componentDidMount() {
+    this.answerScrambler();
+  }
+
+  answerScrambler = () => {
+    const { questions: { results } } = this.props;
+    const scrambledAnswers = results.map((question) => this.shuffleAnswers(question));
+    this.setState({
+      scrambledAnswers,
+    });
   }
 
   nextHandler = () => {
@@ -37,11 +50,13 @@ class Questions extends Component {
   }
 
   render() {
-    const { indexPosition } = this.state;
+    const { indexPosition, scrambledAnswers } = this.state;
     const { questions: { results }, stopTimer } = this.props;
     const currentQuestion = results[indexPosition];
-    const shuffleAnswer = this.shuffleAnswers(currentQuestion);
-    return (
+    const shuffleAnswer = scrambledAnswers[indexPosition];
+    const renderQuestion = scrambledAnswers.length !== 0;
+    // const shuffleAnswer = this.shuffleAnswers(currentQuestion);
+    return renderQuestion && (
       <div className="questions-container">
         <QuestionCard
           currentQuestion={ currentQuestion }
