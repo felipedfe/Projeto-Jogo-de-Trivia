@@ -57,50 +57,52 @@ class Feedback extends Component {
     const { redirectLogin, redirectRanking } = this.state;
     const PASSING_SCORE = 3;
     return (
-      <div>
+      <div className="gameboard-container">
         <HeaderPlay />
-        <h2 data-testid="feedback-text">
-          {correctAnswers < PASSING_SCORE
-            ? <>Could be better...</>
-            : <>Well Done!</>}
-        </h2>
+        <div className="main-container">
+          <h2 data-testid="feedback-text">
+            {correctAnswers < PASSING_SCORE
+              ? <>Could be better...</>
+              : <>Well Done!</>}
+          </h2>
 
-        <p>
-          Você acertou um total de
-          {' '}
-          <strong
-            data-testid="feedback-total-question"
+          <p>
+            Você acertou um total de
+            {' '}
+            <strong
+              data-testid="feedback-total-question"
+            >
+              {correctAnswers}
+            </strong>
+            {' '}
+            perguntas.
+          </p>
+          <h3>
+            Total de pontos:
+            {' '}
+            <strong
+              data-testid="feedback-total-score"
+            >
+              {totalScore}
+            </strong>
+          </h3>
+          <button
+            type="button"
+            data-testid="btn-play-again"
+            onClick={ this.playAgain }
           >
-            {correctAnswers}
-          </strong>
-          {' '}
-          perguntas.
-        </p>
-        <h3>
-          Total de pontos:
-          {' '}
-          <strong
-            data-testid="feedback-total-score"
+            Play Again
+          </button>
+          <button
+            type="button"
+            data-testid="btn-ranking"
+            onClick={ this.goToRanking }
           >
-            {totalScore}
-          </strong>
-        </h3>
-        <button
-          type="button"
-          data-testid="btn-play-again"
-          onClick={ this.playAgain }
-        >
-          Play Again
-        </button>
-        <button
-          type="button"
-          data-testid="btn-ranking"
-          onClick={ this.goToRanking }
-        >
-          Ranking
-        </button>
-        { redirectLogin && <Redirect to="/" /> }
-        { redirectRanking && <Redirect to="/ranking" /> }
+            Ranking
+          </button>
+          { redirectLogin && <Redirect to="/" /> }
+          { redirectRanking && <Redirect to="/ranking" /> }
+        </div>
       </div>
     );
   }

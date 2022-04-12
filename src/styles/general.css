@@ -63,3 +63,24 @@ body {
   border: 1px solid black;
   height: 100%;
 }
+
+.main-container {
+  align-items: center;
+  background-color: #ecf0f1;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  padding: 10px;
+  text-align: center;
+  width: 80%;
+}
+
+.main-container h2 {
+  color: brown;
+}
+
+.main-container h1 {
+  color: #282c34;
+  margin: 15px;
+}

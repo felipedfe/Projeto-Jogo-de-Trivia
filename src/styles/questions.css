@@ -1,27 +1,6 @@
-.questions-container {
-  align-items: center;
-  background-color: #ecf0f1;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 12px;
-  padding: 10px;
-  text-align: center;
-  width: 80%;
-}
-
-.questions-container h2 {
-  color: brown;
-}
-
-.questions-container h1 {
-  color: #282c34;
-  margin: 15px;
-}
-
 .answers-standard-button, .correctAnswer, .incorretAnswer {
   background-color: #3a4550;
-  border: 2px solid #3a4550;
+  border: 3px solid #3a4550;
   border-radius: 8px;
   color: white;
   margin: 5px;
@@ -47,11 +26,11 @@
 }
 
 .correctAnswer {
-  border: 2px solid rgb(6, 240, 15);
+  border: 3px solid rgb(6, 240, 15);
 }
 
 .incorretAnswer {
-  border: 2px solid red;
+  border: 3px solid red;
 }
 
 .nextBtn {
