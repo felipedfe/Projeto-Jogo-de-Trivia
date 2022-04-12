@@ -6,6 +6,7 @@
 
 body {
   background-color: #282c34;
+  counter-reset: ranking;
 }
 
 .wrapper-container {
@@ -83,4 +84,45 @@ body {
 .main-container h1 {
   color: #282c34;
   margin: 15px;
+}
+
+
+.feedback-buttons {
+  margin-top: 10px;
+}
+
+.general-buttons button {
+  background-color: #3a4550;
+  border: 3px solid #3a4550;
+  border-radius: 8px;
+  color: white;
+  margin: 5px;
+  padding: 4px;
+}
+
+.main-container li:before {
+  content: counter(ranking);
+  counter-increment: ranking;
+}
+
+.main-container li {
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.397);
+  border-radius: 5px;
+  display: flex;
+  height: 50px;
+  justify-content: space-around;
+  margin: 5px;
+  padding: 5px;
+  width: 80%;
+}
+
+.main-container li img {
+  border-radius: 5px;
+  height: 100%;
+  object-fit: contain;
+}
+
+.name-ranking, .score-ranking {
+  width: 20%;
 }

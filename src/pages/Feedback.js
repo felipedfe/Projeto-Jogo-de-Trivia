@@ -67,7 +67,7 @@ class Feedback extends Component {
           </h2>
 
           <p>
-            Você acertou um total de
+            You got
             {' '}
             <strong
               data-testid="feedback-total-question"
@@ -75,10 +75,10 @@ class Feedback extends Component {
               {correctAnswers}
             </strong>
             {' '}
-            perguntas.
+            questions right.
           </p>
           <h3>
-            Total de pontos:
+            Total Score:
             {' '}
             <strong
               data-testid="feedback-total-score"
@@ -86,20 +86,22 @@ class Feedback extends Component {
               {totalScore}
             </strong>
           </h3>
-          <button
-            type="button"
-            data-testid="btn-play-again"
-            onClick={ this.playAgain }
-          >
-            Play Again
-          </button>
-          <button
-            type="button"
-            data-testid="btn-ranking"
-            onClick={ this.goToRanking }
-          >
-            Ranking
-          </button>
+          <div className="general-buttons">
+            <button
+              type="button"
+              data-testid="btn-play-again"
+              onClick={ this.playAgain }
+            >
+              Play Again
+            </button>
+            <button
+              type="button"
+              data-testid="btn-ranking"
+              onClick={ this.goToRanking }
+            >
+              Ranking
+            </button>
+          </div>
           { redirectLogin && <Redirect to="/" /> }
           { redirectRanking && <Redirect to="/ranking" /> }
         </div>

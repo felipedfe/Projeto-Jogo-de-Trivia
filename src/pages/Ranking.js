@@ -46,9 +46,14 @@ class Ranking extends Component {
   render() {
     const { redirectLogin, infoRanking } = this.state;
     return (
-      <div>
-        <p data-testid="ranking-title">Ranking</p>
-        <ol>
+      <div className="gameboard-container">
+        <h1
+          data-testid="ranking-title"
+          className="headerplay-container"
+        >
+          Ranking
+        </h1>
+        <ol className="main-container general-buttons">
           {
             infoRanking.map(({ image, name, totalScore }, index) => (
               <li key={ index }>
@@ -57,19 +62,29 @@ class Ranking extends Component {
                   src={ image }
                   alt={ `${name} - Avatar` }
                 />
-                <span data-testid={ `player-name-${index}` }>{ name }</span>
-                <strong data-testid={ `player-score-${index}` }>{ totalScore }</strong>
+                <span
+                  className="name-ranking"
+                  data-testid={ `player-name-${index}` }
+                >
+                  { name }
+                </span>
+                <strong
+                  className="score-ranking"
+                  data-testid={ `player-score-${index}` }
+                >
+                  { totalScore }
+                </strong>
               </li>
             ))
           }
+          <button
+            type="button"
+            data-testid="btn-go-home"
+            onClick={ this.playAgain }
+          >
+            Play Again
+          </button>
         </ol>
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={ this.playAgain }
-        >
-          Play Again
-        </button>
         {redirectLogin && <Redirect to="/" />}
       </div>
     );
