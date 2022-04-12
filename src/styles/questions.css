@@ -47,11 +47,11 @@
 }
 
 .correctAnswer {
-  border: 3px solid rgb(6, 240, 15);
+  border: 2px solid rgb(6, 240, 15);
 }
 
 .incorretAnswer {
-  border: 3px solid red;
+  border: 2px solid red;
 }
 
 .nextBtn {
