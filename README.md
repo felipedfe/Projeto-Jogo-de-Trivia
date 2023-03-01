@@ -1,21 +1,21 @@
-# Jogo de Trivia
+# Trivia Game
 
-## •Descrição
-Uma aplicação que simula um jogo perguntas e respostas. O usuário efetua um login na tela inicial e depois recebe 5 perguntas para serem respondidas em sequencia (cada uma delas possui uma alternativa correta e outras 3 incorretas). Um timer conta o tempo máxima de 30 segundos para cada pergunta ser respondida. No final é mostrada uma tela com um ranking dos melhores resultados. Foi desenvolvida em Redux e React utilizando componentes de Classes. A API usada foi a Open Trivia Database (https://opentdb.com/api_config.php).
+## •Description
+An application that simulates a trivia game. The user logs in on the home screen and then receives 5 questions to be answered in sequence (each of them has a correct alternative and another 3 incorrect ones). A timer counts the maximum time of 30 seconds for each question to be answered. At the end, a screen with a ranking of the best results is shown. It was developed in Redux and React using Class components. The API used was the Open Trivia Database (https://opentdb.com/api_config.php).
 
-## •Tecnologias e bibliotecas
+## •Technologies and Libraries
 - Javascript
 - HTML
 - CSS
 - React
 - Redux
 
-## •Executando a aplicação
-- Clone o repositório em sua máquina
-- No terminal, instale as dependência da aplicação: ```npm install```
-- Agora é só colocar a aplicação para rodar: ```npm start```
+## •How to run the application
+- Clone the repository on your machine
+- In the terminal, install the application's dependencies: `npm install`
+- Now just put the application to run!: `npm start`
 
-## •Grupo do projeto
+## •Project Partners
 - Alan Souza
 - Carlos Pabst
 - Davíd Roggér
